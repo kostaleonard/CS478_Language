@@ -1,0 +1,90 @@
+void mergeSort(~Array<int> arr){
+  #Note: uses call-by-reference.
+  #Sorts arr in place.
+  if arr.length <= 1 {return;}
+  int mid = arr.length//2;
+  Array<int> leftHalf = arr[0:mid];
+  Array<int> rightHalf = arr[mid:arr.length];
+  
+  mergeSort(leftHalf);
+  mergeSort(rightHalf);
+  
+  int i = 0;
+  int j = 0;
+  int k = 0;
+  
+  while i < leftHalf.length and j < rightHalf.length {
+    if leftHalf[i] < rightHalf[j] {
+      arr[k] = leftHalf[i];
+      i++;
+    }
+    else {
+      arr[k] = rightHalf[j];
+      j++;
+    }
+    k++;
+  }
+  
+  while i < leftHalf.length {
+    arr[k] = leftHalf[i];
+    i++;
+    k++;
+  }
+  
+  while j < rightHalf.length {
+    arr[k] = rightHalf[j];
+    j++;
+    k++;
+  }
+}
+
+void not_mergeSort(Array<int> arr){
+  #Does NOT use call-by-reference.
+  #So, this will not sort the array in place.
+  if arr.length <= 1 {return;}
+  int mid = arr.length//2;
+  Array<int> leftHalf = arr[0:mid];
+  Array<int> rightHalf = arr[mid:arr.length];
+  
+  mergeSort(leftHalf);
+  mergeSort(rightHalf);
+  
+  int i = 0;
+  int j = 0;
+  int k = 0;
+  
+  while i < leftHalf.length and j < rightHalf.length {
+    if leftHalf[i] < rightHalf[j] {
+      arr[k] = leftHalf[i];
+      i++;
+    }
+    else {
+      arr[k] = rightHalf[j];
+      j++;
+    }
+    k++;
+  }
+  
+  while i < leftHalf.length {
+    arr[k] = leftHalf[i];
+    i++;
+    k++;
+  }
+  
+  while j < rightHalf.length {
+    arr[k] = rightHalf[j];
+    j++;
+    k++;
+  }
+}
+
+void main(){
+  Array<int> myArray = [8, 7, 1, 2, 5, 6, 0, 3, 4, 9];
+  print(myArray);
+  not_mergeSort(myArray);
+  print(myArray);
+  mergeSort(myArray);
+  print(myArray);
+}
+
+main();

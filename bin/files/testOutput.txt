@@ -1,0 +1,265 @@
+Starting tests.
+Passed:
+int x;
+Passed:
+int x = 0;
+Passed:
+float x = 0.0;
+Passed:
+String x = "hello";
+Passed:
+char x = 'a';
+Passed:
+bool x = false;
+Passed:
+bool x = true;
+Passed:
+int x = 10 + 20;
+Passed:
+bool x = true or false == 5;
+Passed:
+float x = 3**4;
+Passed:
+int x = 10; int y = x % 2;
+Passed:
+int one(){ return 1; } int x = one() + 2;
+Passed:
+int one(){ return 1; } float x = one() + 2.0;
+Passed:
+int x = 5 * 3;
+Passed:
+int x = 5 / 3;
+Passed:
+int x = 9 // 2;
+Passed:
+int x = 1 - 2;
+Passed:
+bool x = true == true;
+Passed:
+bool x = true != false or (5-2) == 3;
+Passed:
+bool x = 2.0 <= 5;
+Passed:
+bool x = 0 < 1 or 1.0 > 2 or 1 >= 5.0;
+Passed:
+int x = 0; x = 5;
+Passed:
+int x = 1; if x == 0 { print(1); }
+Passed:
+for int x = 0, x < 5, x++ { int q = 2; }
+Passed:
+while true { int q = 2; }
+Passed:
+void doSomething(int x, char y){ x = x + 1; return; }
+Passed:
+void doSomething(~int x, char y){ x = x + 1; return; }
+Passed:
+void doSomething(int x, char y){ x = x + 1; return; } doSomething(7, 'a');
+Passed:
+int fact(int n){ if n == 0 { return 1; } return n * fact(n - 1); }
+Passed:
+Array<int> arr = [1, 2, 3, 4]; int x = arr[0];
+Passed:
+Array<int> arr = [1, 2, 3, 4]; int x = arr[1-1];
+Passed:
+Array<int> arr = [1, 2, 3, 4]; int index = 1; int x = arr[index];
+Passed:
+Array<int> arr = [1, 2, 3, 4]; int foo(){ return 0; } int x = arr[foo()];
+Passed:
+Array<int> arr = [1, 2, 3, 4]; Array<int> sub = arr[0:1];
+Passed:
+Array<int> arr = [1, 2, 3, 4]; Array<int> sub = arr[:1];
+Passed:
+Array<int> arr = [1, 2, 3, 4]; Array<int> sub = arr[0:];
+Passed:
+Array<int> arr = [1, 2, 3, 4]; Array<int> sub = arr[:];
+Passed:
+bool x = [false, false, true][1];
+Passed:
+Array<int> arr = [1, 2, 3, 4]; arr[0] = 0;
+Passed:
+Array<Array<int>> arr = [[1, 2, 3, 4], [5, 6, 7, 8]]; int x = arr[0][0];
+Passed:
+Array<Array<int>> arr = [[1, 2, 3, 4], [5, 6, 7, 8]]; Array<int> sub = arr[0][1:2]; int x = sub[0];
+Passed:
+Array<Array<int>> arr = [[1, 2, 3, 4], [5, 6, 7, 8]]; Array<int> sub = arr[0]; int x = sub[0];
+Passed:
+Array<int> arr = [1, 2, 3, 4]; arr = [1];
+Passed:
+Array<int> arr = [1, 2, 3, 4]; arr = [];
+Passed:
+Array<int> arr = []; arr = [];
+Passed:
+Array<int> arr = []; arr = [1];
+Passed:
+Array<Array<int>> arr = [[1, 2, 3, 4], [5, 6, 7, 8]]; arr = [[]];
+Passed:
+Array<Array<int>> arr = [[1, 2, 3, 4], [5, 6, 7, 8]]; arr[0] = [1];
+Passed:
+Array<Array<int>> arr = [[1, 2, 3, 4], [5, 6, 7, 8]]; arr[0] = []; arr[0] = []; arr[0] = [1];
+Passed:
+Array<Array<Array<int>>> arr = [[[1, 2, 3, 4], [5, 6, 7, 8]], []]; int x = arr[0][0][0];
+Passed:
+Array<Array<Array<int>>> arr = [[[1, 2, 3, 4], [5, 6, 7, 8]], []]; arr[0][0][0] = 1;
+Passed:
+Array<Array<Array<int>>> arr = [[[1, 2, 3, 4], [5, 6, 7, 8]], []]; arr[0][0:][1] = [1];
+Passed:
+struct node{ int value = 0; }
+Passed:
+struct node{ int value = 0; } print(node.value);
+Passed:
+struct node{ int value = 0; } int x = node.value;
+Passed:
+struct node{ int value = 0; } node.value = 10;
+Passed:
+struct node{ int value = 0; } node n = node; n.value = 99;
+Done.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+FAILED TEST
+      program = List(DecVar(int,x,None), Output(x))
+      expected List(null)
+      but got  List(null)
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed.
+Passed:
+Array<int> arr = [1, 2, 3, 4];
+[9, 2, 3, 4]
+Passed:
+Array<int> arr = [1, 2, 3, 4]; arr[0] = 9; print(arr);
+[1, 2, 3, 9]
+Passed:
+Array<int> arr = [1, 2, 3, 4]; arr[3] = 9; print(arr);
+9
+Passed:
+Array<int> arr = [1, 2, 3, 4]; arr[0] = 9; print(arr[0]);
+[2]
+Passed:
+Array<int> arr = [1, 2, 3, 4]; arr[0] = 9; print(arr[1:2]);
+[9, 2, 3, 4]
+Passed:
+Array<int> arr = [1, 2, 3, 4]; arr[0] = 9; print(arr[:]);
+[9, 2]
+Passed:
+Array<int> arr = [1, 2, 3, 4]; arr[0] = 9; print(arr[:2]);
+[[9], [1]]
+Passed:
+Array<Array<int>> arr = [[1, 2, 3, 4], [1]]; arr[0] = [9]; print(arr);
+[[5], [1]]
+Passed:
+Array<Array<int>> arr = [[1, 2, 3, 4], [1]]; arr[0] = []; arr[0] = [5]; print(arr);
+[[9, 2, 3, 4], [1]]
+Passed:
+Array<Array<int>> arr = [[1, 2, 3, 4], [1]]; arr[0][0] = 9; print(arr);
+[[[9, 2, 3, 4], [1]], [[]]]
+Passed:
+Array<Array<Array<int>>> arr = [[[1, 2, 3, 4], [1]], [[]]]; arr[0][0][0] = 9; print(arr);
+0
+Passed:
+struct node{ int x = 0; } print(node.x);
+0
+3
+Passed:
+struct node{ int x = 0; } node n = node; n.x = 3; print(node.x); print(n.x);
+5
+3
+Passed:
+struct node{ int x = 0; } node n = node; n.x = 3; node.x = 5; print(node.x); print(n.x);
+3
+5
+Passed:
+struct node{ int x = 0; } node n1 = node; n1.x = 3; node.x = 5; node n2 = node; print(n1.x); print(n2.x);
+Passed:
+struct node{ node next; int value = 0; } node n = node; n.next = node;
+2
+Passed:
+struct node{ node next; int value = 0; } node n = node; n.next = node; n.next.value = 2; print(n.next.value);
+3
+Passed:
+struct node{ node next; int value = 0; } node n = node; n.next = node; n.next.next = node; n.next.next.value = 3; print(n.next.next.value);
+Passed:
+struct node<A> { A value; }

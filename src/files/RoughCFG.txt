@@ -1,0 +1,92 @@
+<int> = (-?[1-9][0-9]*)|0
+<flt> = (-?[0-9]+"."[0-9]*)|(-?[0-9]*"."[0-9]+)
+<num> = <int> | <flt>
+<str> = \"[^\"\n]\" 
+<chr> = \'[^\'\n]\' 
+<bool> = "true" | "false"
+<type> = <ident>
+       | <ident> "<" <type> ( "," <type>)* ">"
+<arrliteral> = "[" <args> "]"				#Used to declare arrays, as in Array<int> x = [5, 4, 7];
+<ident> = [a-zA-z][a-zA-Z0-9_]*
+<args> = ( ~?<expr> ( "," ~?<expr> )* )? 
+<typedargs> = ( <type> <ident> (, <type> <ident>)* )?	#This is used in function declarations to state the types of the respective arguments, which must be identifiers
+<funct> = <ident> "(" <args> ")"	#Here, <ident> is the function name. This is a function call.
+
+1.Expressions
+<expr> =
+	   #Numerical operations:
+	   <num>
+       | '(' <expr> ')'					#Parens
+	   | <expr> '**' <expr>				#Exponentiation
+	   | <expr> '*' <expr>				#Multiplication
+	   | <expr> '/' <expr>				#Division
+	   | <expr> '//' <expr>					#Floor; subset of division
+	   | <expr> '%' <expr>					#Modulus; subset of division
+	   | <expr> '+' <expr>				#Addition
+	   | <expr> '-' <expr>				#Subtraction
+	   #Boolean operations: (remove spaces)
+	   | <bool>
+	   | "not" <expr>					#Boolean not; like multiplication but highest priority
+	   | <expr> "and" <expr>			#Boolean and; like multiplication
+	   | <expr> "or" <expr>			#Boolean or; like addition
+	   | <expr> "==" <expr>				#Equality operator
+	   | <expr> "!=" <expr>				#Inverse equality operator
+	   | <expr> "<=" <expr>				#Less than or equal to operator
+	   | <expr> ">=" <expr>				#Greater than or equal to operator
+	   | <expr> "<" <expr>				#Less than operator
+	   | <expr> ">" <expr>				#Greater than operator
+	   #Array operations:
+	   | <expr> ("[" <expr> "]")+       #Array(possibly multidimensional) access
+	   | <expr> ("[" <expr>? ":" <expr>? "]")+ #Array(possibly multidimensional) slice
+	   #String operations:
+	   | <str>
+	   #Char operations:
+	   | <chr>
+	   #An identifier:
+	   #This identifier could reference an expression.
+	   #The identifier could also contain a field or function (method) that references an expression.
+	   | <ident>
+	   #A function:
+	   | <funct>
+	   #Functions and fields that belong to expressions:
+	   #Because an expression evaluates to an object, it follows that this object may have its own functions and fields.
+	   #These could also be expressions.
+	   | <expr> "." <ident>
+	   #Null
+	   | "null"
+	   
+2.Declarations
+<dec> = <type> <ident> 							     		#declaration, no assignment. int x;
+	  | <type> <ident> "=" <expr> 							#declaration and assignment for literals. int x=5;
+	  | <type> <ident> "=" "new" <type> "(" <args> ")"		#declaration and assignment for non-literals. Map<String, int> map = new Map<String, int>();
+	  | <type> <ident> "(" <typedargs> ")" "{" <stmt> "}" 			#function declaration. int x(). <stmt> is the function body.
+	  
+3.Statements
+#Note that semicolons are appended here to form complete statements
+<reassign> = <ident> "=" <expr>
+           | <ident> "++"
+		   | <ident> "--"
+		   | <ident> "+=" <expr>
+		   | <ident> "-=" <expr>
+		   | <ident> "*=" <expr>
+		   | <ident> "/=" <expr>
+
+<arraymod> = <expr> ("[" <expr> "]")+ "=" <expr> 				#Replace the value of an index in the array.
+
+<stmt> = <expr> ";"										
+	   | <dec> ";"
+	   | <reassign> ";"										#Reassignment
+	   | <arraymod> ";"
+	   | "{" <stmt>* "}"									#This is used to group statements, like after an if or a while. It functions as a single unit. Also null statement {}.
+	   | "if" <expr> "{" <stmt> "}" ("elif" <expr> "{" <stmt> "}")* ("else" "{" <stmt> "}")? "}"
+	   | "while" <expr> "{" <stmt> "}"
+	   | "for" (<dec> ",")? <expr> "," (<funct> | <reassign>) "{" <stmt> "}"	#Can have nested for loops in second-to-last statement.
+	   | "try" "{" <stmt> "}" "except" "{" <stmt> "}"				#This may become more sophisticated later.
+	   | "return" <expr>? ";"
+	   | "break" ";"
+	   | "continue" ";"
+
+4.Programs - The Main CFG
+#A program is composed of 0 or more consecutive statements.
+<prgm> = <stmt>*	   
+	

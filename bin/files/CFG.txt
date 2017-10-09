@@ -1,0 +1,226 @@
+#Leonard R. Kosta Jr.
+
+Part A: Lexical Syntax
+-Whitespace: whitespace (indents and line breaks) will not be mandatory in any circumstance except to separate different tokens.
+In this case, any form of whitespace is acceptable (space, tab, new line).
+Statements end in semi-colons (see the CFG below).
+-Case Sensitivity: the language is case sensitive.
+-Notation: notation will be infix. That is, operators will be placed between their operands (1+2).
+-Legal identifiers: any combination of the characters a-z, A-Z, 0-9, and _ BUT must start with either a-z or A-Z.
+-Literals (see regular expressions below):
+  123 - int literal for the integer 123.
+  -12 - int literal for the NEGATIVE integer -12.
+  1.2 - float literal for the float 1.2
+  .2, 0.2, 1. are valid as well
+  "hello" - String literal
+  'a' - char literal. Note that a char is a single character and thus '' cannot contain more than one symbol.
+  true - boolean literal for true.
+  false - boolean literal for false.
+  [1, 2, 3] - Array literal
+-Symbols:
+  #  - comment. Everything until the next \n character is ignored.
+  ;  - end of statement. These are mandatory.
+  == - test for equality. Evaluates to either true or false.
+       In the case of primitive types, the == operator is implemented such that it compares the values of the two types (1==1 compares the integers' values).
+	   In absence of a definition, the default implementation is to compare the two objects' locations in memory.
+	   This will return true if they are the same object (they have the same memory location), false otherwise.
+  >  - boolean greater than. Evaluates to either true or false.
+  >= - boolean greater than or equal to. Evaluates to either true or false.
+  <  - boolean less than. Evaluates to either true or false.
+  <= - boolean less than or equal to. Evaluates to either true or false.
+  != - boolean not equal to. Evaluates to either true or false.
+       It should be noted that this is just a shortcut for the boolean expression: not a==b.
+       However, ! cannot be substituted for the keyword not anywhere else in the language.
+  ++ - increment by 1 and reassign. These are not in the CFG described below; they will be implemented later.
+  -- - decrement by 1 and reassign. These are not in the CFG described below; they will be implemented later.
+       NOTE: the ++ and -- operators are complete statements.
+	   That is, x++; is a valid statement, but x=y++; is invalid.
+	   Also note that this is equivalent to +=1 and -=1, respectively.
+	   Finally, only postfix notation is supported (x++ is valid, but not ++x).
+	   This is the only valid use for the ++ and -- operators.
+  += - increment by the specified value and reassign.
+  -= - decrement by the specified value and reassign.
+       These operators, like the ++ and -- operators, are complete statements.
+  // - divide and truncate function.
+  =  - (re)assignment operator. Only one assignment may occur per statement in order to avoid confusion.
+       For example, one could not write: Array<int> a = 0 + (Array<int> myArray = [1, 2, 3, 4, 5]);
+	   Also note that when a variable is initially assigned, it must include a type declaration explicitly.
+	   Assignment: int a = 5;
+	   Reassignment: a = 5; #Where a is some integer that has already been defined elsewhere
+  ** - power function (x**2 is the same as x*x).
+  "" - denotes string literal.
+  '' - denotes char literal
+  %  - modulus operator
+  [] - Array literal OR collection accessor depending on where placed.
+       These will be evaluated as a collection accessor if they are placed next to the reference to some collection object.
+	   The return type of this collection accessor varies depending on the type of collection the user selects.
+	   Arrays will return the element at that index (myArr[0] evaluates to 5).
+	   Sets will return true if the element in [] is in the set (animals["dog"] evaluates to true).
+	   Maps will return the corresponding value to the key given in [] (phonebook["jenny"] evaluates to "867-5309").
+	   Otherwise, the [] are treated as an Array literal, much like 5 is a literal for the integer 5.
+	   For example: Array<int> myArr = [1, 2, 3];
+	   Note that Sets and Maps are not implemented.
+  [:]- Array slicing operator (as used in Python). The slice operator is half-inclusive (left inclusive, right exclusive).
+       The ints on either side of the colon are optional and their exclusion means different things.
+	   [a:b] - return a new Array of the elements from a (inclusive) to b (exclusive).
+	   [a:]  - return a new Array of the elements from a (inclusive) to the end of the Array.
+	   [:b]  - return a new Array of the elements from the start of the Array to b (exclusive).
+	   [:]   - return a new Array of the elements from the start of the Array to the end of the Array.
+	           This is also known as a shallow copy.
+  () - grouping operator for mathematical expressions and expresses function inputs
+  +  - addition operator
+  -  - subtraction operator OR negative number literal if it precedes an int or float literal
+  *  - multiplication operator
+  /  - division operator
+  <> - type parameter denotation (for example: Array<int>)
+  ,  - element separator
+  {} - used to wrap multiple statements as a single statement, as used in functions and loops
+  .  - dot notation for methods and fields of structs
+-Keywords:
+  and - boolean and
+  or - boolean or
+  not - boolean not
+  for - for loop
+        Syntax: for (<dec>,)? <expr>, <statement> <blockStatement>
+	    Example: for int i = 0, i < 5, i++ { print(i); }
+  if - if statement
+       Syntax: if <expr> <blockStatement>
+	   Example: if myInt < 5 or someBooleanFunction() { print("hello"); }
+  elif - else if. Follows an if and has the same syntax.	 
+  else - else clause of an overarching if statement
+  while - while statement
+          Syntax: while <expr> <blockStatement>
+	      Example: while true { print("this program runs forever"); }
+  return - used to define the output or evaluation of a function.
+           The type of the value returned must match the return type of the function.
+           If no value should be returned, the return type is void and the return statement is optional.
+           If there is a return, it will not be followed by an expression (i.e. return;)		
+  void - the return type for null.
+         If a function's return type is void, then a return statement is not required.
+	     One MAY be used if it returns a null-type (i.e. return;)
+  null - a reference to nothing.
+         Can be used to check if a variable has been assigned a value (if node == null{ })
+  true - boolean true.
+  false - boolean false.
+  print - prints the given string to stdout.
+          Syntax: print("hello, world!");
+          
+Regular Expressions for Variable Tokens:
+-Valid Identifiers: [a-zA-z][a-zA-Z0-9_]*
+-Int Literals: (-?[1-9][0-9]*)|0
+-Float Literals: (-?[0-9]+"."[0-9]*)|(-?[0-9]*"."[0-9]+) 
+-String Literals: \"[^\"\n]*\" 
+-Char Literals: \'[^\'\n]\' 
+Syntactically, within the [] I am trying to give the following rules:
+1.Each item in the Array may include one or more of any character EXCEPT the , (as this is the separator).
+2.After the first element, there can be any number of additional elements like the first, separated by commas.
+3.All elements are optional. That is, [] is a valid Array literal.
+This will not filter out value errors, but it will filter syntax errors.
+
+Part B: CFG, 1st Cut
+-See "RoughCFG.txt" for the rough, ambiguous CFG.
+   
+Part C: Unambiguous CFG
+<int> = (-?[1-9][0-9]*)|0
+<flt> = (-?[0-9]+"."[0-9]*)|(-?[0-9]*"."[0-9]+)
+<num> = <int> | <flt>
+<str> = \"[^\"\n]\" 
+<chr> = \'[^\'\n]\' 
+<bool> = "true" | "false"
+<ident> = [a-zA-z][a-zA-Z0-9_]*
+<type> = <ident>
+       | <ident> "<" <type> ( "," <type>)* ">"
+<arrliteral> = "[" <args> "]"				
+<args> = ( <expr> ( "," <expr> )* )? 
+<typedargs> = ( ~? <type> <ident> (, ~? <type> <ident>)* )?	
+<funct> = <ident> "(" <args> ")"	
+<arr> = <arrliteral>
+      | <ident>
+	  | <funct>
+<null> = "null"
+
+1.Expressions:
+#Atomic/Highest Order of Operations
+<expr0> = <num>
+		| <bool>
+		| <str>
+		| <chr>
+		| <null>
+		| <arrliteral>
+		| <arr> ("[" <expr> "]")+       
+	    | <arr> ("[" <expr>? ":" <expr>? "]")+
+		| <ident>
+		| <funct>
+		| '(' <expr> ')'	
+		| <expr0> ("." <ident> | "." <funct>)+										
+
+#Exponentiation
+<expr1> = <expr0> '**' <expr1>
+        | <expr0>	
+
+#Multiplication/Division
+<expr2> = <expr2> '*' <expr1>				
+	    | <expr2> '/' <expr1>	
+	    | <expr2> '//' <expr1>					
+	    | <expr2> '%' <expr1>		
+		| <expr1>
+
+#Addition/Subtraction
+<expr3> = <expr3> '+' <expr2>				
+	    | <expr3> '-' <expr2>		
+		| <expr2>
+	   
+<expr4> = "not" <expr4>
+        | <expr3>		
+	
+#Comparators	   
+<expr5> = <expr5> "==" <expr4>				
+	    | <expr5> "!=" <expr4>				
+	    | <expr5> "<=" <expr4>				
+	    | <expr5> ">=" <expr4>				
+	    | <expr5> "<" <expr4>				
+	    | <expr5> ">" <expr4>		
+		| <expr4>
+	
+<expr6> = <expr6> "and" <expr5>
+		| <expr5>
+		
+<expr7> = <expr7> "or" <expr6>
+		| <expr6>
+		
+<expr> = <expr7>
+
+2.Declarations
+<dec> = <type> <ident> 							     		        #declaration, no assignment. int x;
+	  | <type> <ident> "=" <expr> 							        #declaration and assignment for literals. int x=5;
+	  | <type> <ident> "=" "new" <type> "(" <args> ")"		        #declaration and assignment for non-literals. Map<String, int> map = new Map<String, int>();
+	  | <type> <ident> "(" <typedargs> ")" "{" <stmt>* "}" 			#function declaration. <stmt> is the function body.
+	  | <structdec>
+
+<structdec> = "struct" <ident> "{" (<dec> ";")* "}"
+
+3.Statements
+#Note that semicolons are appended here to form complete statements
+<reassign> = <ident> "=" <expr>
+           | <ident> "++"
+		   | <ident> "--"
+		   | <ident> "+=" <expr>
+		   | <ident> "-=" <expr>
+		   | <ident> "*=" <expr>
+		   | <ident> "/=" <expr>
+
+<arraymod> = <ident> ("[" <expr> "]")+ "=" <expr> 		
+<blockStatement> = "{" <stmt>* "}"
+		   
+<stmt> = <expr> ";"										
+	   | <dec> ";"
+	   | <reassign> ";"										
+	   | <arraymod> ";"
+	   | <blockStatement>									
+	   | "if" <expr> "{" <stmt>* "}" ("elif" <expr> "{" <stmt>* "}")* ("else" "{" <stmt>* "}")? "}"
+	   | "while" <expr> "{" <stmt>* "}"
+	   | "for" (<dec> ",")? <expr> "," <reassign> "{" <stmt>* "}"	
+	   | "return" <expr>? ";"
+
+4.Programs - The Main CFG
+<prgm> = <stmt>*

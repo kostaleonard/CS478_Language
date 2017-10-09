@@ -1,0 +1,136 @@
+#Sample Program
+#Misc. Operations
+
+bool lessThanThree(int x){
+  return x < 3;
+}
+int x = 0;
+x++;
+x;
+for x < 5, x++ {
+  print(x);
+}
+if lessThanThree(x) {
+  print(x);
+}
+for int y = 0, y < 5, y++ {
+  print(x);
+  print(y);
+}
+int myInt = 5;
+bool flag = false;
+while not flag{
+  print("myInt = " + myInt);
+  myInt -= 1;
+  if myInt == 0{
+    flag = not flag;
+  }
+}
+print(("x" + "-") * 20);
+if 5+2*3 == 12-1 and true {
+  print("Hello, world!");
+  int y = 0;
+  if true {
+    int y = 1;
+    print(y);
+  }
+  print(y);
+}
+#Throws error correctly because y has no binding at this point:
+#print(y);
+{
+  float w = 0.0;
+  w += 1.1;
+  print(w);
+  {
+    print(w);
+    print(w == w);
+  }
+}
+
+Array<int> arr = [];
+arr = [1];
+arr = [1, 2, 3, 4, 5];
+print(arr);
+arr += 6;
+print(arr);
+arr *= 0;
+print(arr);
+print((arr + 1)*5);
+print(arr);
+
+String myFun(bool x){
+  if x{ return "yes!"; }
+  print("...thinking...");
+  return "no!";
+  #This should never execute:
+  print("done.");
+}
+print(myFun);
+print(myFun(true));
+print(myFun(false));
+
+void CBRTest(~int y){ y=y+1; }
+int x = 0;
+print(x);
+CBRTest(x);
+print(x); #should be 1
+
+void CBVTest(int y){ y=y+1; return; }
+int x = 0;
+print(x);
+CBVTest(x);
+print(x); #should be 0
+
+Array<int> emptyArray() { return []; }
+arr = emptyArray();
+
+MyClass<int, float, bool> myObj;
+MyClass2<Array<Array<int>>> myObj2;
+MyClass3<int, int, Array<Array<int>>, float> myObj3;
+
+void incToThree(~int x){
+  if x == 3 { return; }
+  print(x);
+  x++;
+  incToThree(x);
+}
+incToThree(x);
+
+int a = 0;
+int b = a;
+b++;
+print(a);
+
+print("struct tests");
+
+struct node{
+  node next;
+  int value = 99; #each node is constructed with a default value of 99
+}
+
+print(node.value);
+#print(node.next.value);
+
+node n = node;
+n.value = 5;
+print(n.value);
+print(node.value);
+
+arr += 1;
+arr *= 6;
+print(arr);
+print(arr.length);
+
+Array<int> arr2 = arr;
+arr2 += 1;
+print(arr2);
+print(arr);
+
+node x = node;
+node y = node;
+print(x == y);
+node z = y;
+print(z == y);
+z.value = 5;
+print(y.value);

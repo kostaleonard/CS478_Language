@@ -1,0 +1,31 @@
+#A node in a linked list:
+struct node{
+  #The next node is initially null.
+  node next;
+  #The value is initially 0.
+  int value = 0;
+} 
+
+#Create a new node object:
+node head = node;
+#head is now a node object with next pointing to null and value pointing to 0
+node tail = node;
+head.next = tail;
+#tail's next field still points to null, as specified in node
+head.value = 9;
+tail.value = -1;
+#Let's change the default node behavior.
+node.value = 7;
+#Now, new nodes will have a value of 7.
+node middle = node;
+head.next = middle;
+middle.next = tail;
+
+print(head.value);
+print(head.next.value);
+print(head.next.next.value);
+
+#Should output:
+#9
+#7
+#-1

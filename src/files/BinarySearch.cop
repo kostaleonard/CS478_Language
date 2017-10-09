@@ -1,0 +1,68 @@
+struct tree{
+  int value = 0;
+  tree left;
+  tree right;
+}
+
+tree insert(tree root, int x){
+  if root == null {
+    tree result = tree;
+    result.value = x;
+    return result;
+  }
+  elif x <= root.value {
+    root.left = insert(root.left, x);
+    return root;
+  }
+  else{
+    root.right = insert(root.right, x);
+    return root;
+  }
+}
+
+bool search(tree root, int target){
+  if root == null {
+    return false;
+  }
+  elif target == root.value {
+    return true;
+  }
+  elif target < root.value {
+    return search(root.left, target);
+  }
+  else{
+    return search(root.right, target);
+  }
+}
+
+void prelimTest(){
+  print("Beginning tests:");
+  tree test = insert(null, 1);
+  print(test.value);
+  test = insert(test, 2);
+  print(test.value);
+  print(test.left);
+  print(test.right);
+  print(test.right.value);
+}
+
+void searchTest(){
+  print("Search tests:");
+  Array<int> arr = [8, 7, 1, 2, 5, 6, 0, 3, 4, 9];
+  tree root = tree;
+  for int i = 0, i < 10, i++ {
+    root = insert(root, arr[i]);
+    print("Inserted: "+arr[i]);
+  }
+  for int i = -2, i < 13, i++ {
+    print("Found " + i + "?");
+    print(search(root, i));
+  }
+}
+
+void main(){
+  prelimTest();
+  searchTest();
+}
+
+main();
