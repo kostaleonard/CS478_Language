@@ -18,5 +18,5 @@
 
 ### Who do I talk to? ###
 
-* Probably no one since this I don't plan to do any maintenance anyway
+* Probably no one since I don't plan to do any maintenance anyway
 * But you can contact me at kostaleonard@gmail.com if you really feel like it
